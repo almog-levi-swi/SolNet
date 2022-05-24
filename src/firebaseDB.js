@@ -1,6 +1,6 @@
 const initializeApp = require('firebase/app');
 const { collection, getDocs } = require('firebase/firestore/lite');
-const { getDatabase, ref, child, get } = require('firebase/database');
+const { getDatabase, ref, child, get, push, set, remove } = require('firebase/database');
 
 
 // // TODO: Replace the following with your app's Firebase project configuration
@@ -11,30 +11,57 @@ const { getDatabase, ref, child, get } = require('firebase/database');
  // const app = initializeApp(firebaseConfig);
   //const db = getFirestore(app);
   
-  // Get a list of employees from your database
-  async function getEmployees(db) {
-    console.log('getEmployees')
-    const employeesCol = collection(db, 'employees');
-    console.log('employeesCol:', employeesCol);
-    const employeesSnapshot = await getDocs(employeesCol);
-    console.log('employeesSnapshot:', employeesSnapshot);
-    const employeesList = employeesSnapshot.docs.map(doc => doc.data());
-    console.log('about to return', employeesList)
-    return employeesList;
-  }
- 
-function getEmployeesAri() {
+async function getEmployees() {
     const dbRef = ref(getDatabase());
-    return get(child(dbRef, 'employees')).then((snapshot) => {
+    return await get(child(dbRef, 'employees')).then((snapshot) => {
       if (snapshot.exists()) {
-        console.log('snapshot VAL:', snapshot.val());
         return snapshot.val();
       } else {
         console.log("No data available");
+        return null
       }
     }).catch((error) => {
       console.error(error);
+      return null
     });
 }
 
-module.exports = { getEmployees, getEmployeesAri };
+async function insertEmployee(employee) {
+    const db = getDatabase();
+    const dbRef = ref(db);
+    const newEmpRef = push(child(dbRef, 'employees'))
+    await set(newEmpRef, employee)
+    return newEmpRef.key
+}
+
+async function updateEmployee(key, employee) {
+    const db = getDatabase();
+    const dbRef = ref(db);
+    const newEmpRef = ref(db, `employees/${key}`)
+    await set(newEmpRef, employee)
+}
+
+async function getEmployee(key) {
+    const db = getDatabase();
+    const dbRef = ref(db);
+    return await get(child(dbRef, `employees/${key}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No data available");
+        return null
+      }
+    }).catch((error) => {
+      console.error(error);
+      return null
+    });
+}
+
+async function deleteEmployee(key) {
+    const db = getDatabase();
+    const dbRef = ref(db);
+    const newEmpRef = ref(db, `employees/${key}`)
+    await remove(newEmpRef)
+}
+
+module.exports = { getEmployees, insertEmployee, updateEmployee, getEmployee, deleteEmployee };
