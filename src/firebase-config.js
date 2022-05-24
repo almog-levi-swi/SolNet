@@ -1,4 +1,5 @@
-import { initializeApp } from "firebase/app";
+// import { initializeApp } from "firebase/app";
+const { initializeApp } = require('firebase/firebase/app')
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_APIKEY,
@@ -13,3 +14,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+module.exports = { app }
