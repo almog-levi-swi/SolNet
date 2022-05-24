@@ -1,23 +1,15 @@
-import DynamicKids from "./DynamicKids";
-import React, { useState } from 'react';
+import DynamicKids from "./DynamicKids.js";
+import React, { useState } from "react";
 
-
-import {
-  Button,
-  Form,
-  Input,
-  Select,
-  DatePicker,
-  Checkbox,
-} from "antd";
+import { Button, Form, Input, Select, DatePicker, Checkbox } from "antd";
 
 const { Option } = Select;
 const birthDateConfig = {
   rules: [
     {
-      type: 'object',
+      type: "object",
       required: true,
-      message: 'Please select your birth date!',
+      message: "Please select your birth date!",
     },
   ],
 };
@@ -25,9 +17,9 @@ const birthDateConfig = {
 const endDateConfig = {
   rules: [
     {
-      type: 'object',
+      type: "object",
       required: true,
-      message: 'Please select your End date!',
+      message: "Please select your End date!",
     },
   ],
 };
@@ -35,13 +27,12 @@ const endDateConfig = {
 const joinDateConfig = {
   rules: [
     {
-      type: 'object',
+      type: "object",
       required: true,
-      message: 'Please select your join date!',
+      message: "Please select your join date!",
     },
   ],
 };
-
 
 const formItemLayout = {
   labelCol: {
@@ -79,7 +70,6 @@ const Signup = () => {
   const [kids, setKids] = useState(0);
   const [student, setStudent] = useState(false);
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
   };
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
@@ -192,15 +182,11 @@ const Signup = () => {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item
-        name="birth date"
-        label="Birth Date" {...birthDateConfig}>
+      <Form.Item name="birth date" label="Birth Date" {...birthDateConfig}>
         <DatePicker />
       </Form.Item>
 
-      <Form.Item
-       name="join date"
-      label="Join Date" {...joinDateConfig}>
+      <Form.Item name="join date" label="Join Date" {...joinDateConfig}>
         <DatePicker />
       </Form.Item>
 
@@ -353,7 +339,12 @@ const Signup = () => {
           },
         ]}
       >
-        <Select placeholder="Number of kids?"   onSelect={value => { setKids(value) }}>
+        <Select
+          placeholder="Number of kids?"
+          onSelect={(value) => {
+            setKids(value);
+          }}
+        >
           <Option value="0">0</Option>
           <Option value="1">1</Option>
           <Option value="2">2</Option>
@@ -366,19 +357,22 @@ const Signup = () => {
         </Select>
       </Form.Item>
 
-      <DynamicKids kids={kids} birthDateConfig={birthDateConfig}/>
+      <DynamicKids kids={kids} birthDateConfig={birthDateConfig} />
 
-      <Form.Item name="student" valuePropName="unchecked" wrapperCol={{ offset: 6, span: 10 }} onChange={e => setStudent(e.target.checked)}>
+      <Form.Item
+        name="student"
+        valuePropName="unchecked"
+        wrapperCol={{ offset: 6, span: 10 }}
+        onChange={(e) => setStudent(e.target.checked)}
+      >
         <Checkbox>Student?</Checkbox>
       </Form.Item>
 
       {student ? (
-              <Form.Item
-              name="end date"
-              label="End Date" {...endDateConfig}>
-              <DatePicker />
-            </Form.Item>      
-                ) : null}
+        <Form.Item name="end date" label="End Date" {...endDateConfig}>
+          <DatePicker />
+        </Form.Item>
+      ) : null}
 
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
@@ -386,10 +380,7 @@ const Signup = () => {
         </Button>
       </Form.Item>
     </Form>
-    
-    );
+  );
 };
 
 export default Signup;
-
-
