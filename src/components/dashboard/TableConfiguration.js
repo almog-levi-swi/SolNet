@@ -1,9 +1,9 @@
 export const columns = [
   {
     title: "Name",
-    dataIndex: "name",
+    dataIndex: "firstname",
     defaultSortOrder: "descend",
-    sorter: (a, b) => (a.name > b.name ? 1 : -1),
+    sorter: (a, b) => (a.firstname > b.firstname ? 1 : -1),
     render: (text) => {
       return <a>{text}</a>;
     },

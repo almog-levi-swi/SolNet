@@ -27,7 +27,8 @@ export const Chart = ({ data, graphBy, }) => {
         <>
             <VictoryChart
                 theme={VictoryTheme.material}
-                domainPadding={20}
+                domainPadding={40}
+                width={600}
             >
                 <VictoryAxis
                     tickFormat={[...Object.keys(foodCategories)]}
@@ -40,7 +41,7 @@ export const Chart = ({ data, graphBy, }) => {
                     data={foodTypes}
                     x={graphBy}
                     y={quantity}
-                    style={{ data: { fill: COLOR }, labels: { fill: 'white', fontWeight: 'bold', fontSize: '20px' } }}
+                    style={{ data: { fill: COLOR, width: 60 }, labels: { fill: 'white', fontWeight: 'bold', fontSize: '20px' } }}
                     labels={({ datum }) => [datum.quantity]}
                     labelComponent={<VictoryLabel dy={30} />}
                 />

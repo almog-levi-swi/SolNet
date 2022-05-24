@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Dropdown, Button, Space } from 'antd';
-import { groupByTypes } from '../../Consts/types';
+import { groupByTypes } from '../../Consts/types.js';
 
 export const GraphBy = ({ setGraphBy }) => {
 
