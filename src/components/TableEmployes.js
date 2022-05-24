@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table, Modal, Row, Col } from "antd";
 
-const TableEmployes = ({ employes }) => {
+const TableEmployees = ({ employees }) => {
   const columns = [
     {
       title: "Name",
@@ -202,7 +202,7 @@ const TableEmployes = ({ employes }) => {
       </Modal>
       <Table
         columns={columns}
-        dataSource={employes}
+        dataSource={employees}
         size="small"
         onRow={(record) => {
           return {
@@ -217,4 +217,4 @@ const TableEmployes = ({ employes }) => {
   );
 };
 
-export default TableEmployes;
+export default TableEmployees;
