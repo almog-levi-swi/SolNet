@@ -1,18 +1,28 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Button } from "antd";
-
+import Login from "./components/login/Login.js";
+import Signup from "./components/signup/Signup.js";
+import Dashboard from "./components/dashboard/Dashboard.js";
+import ProtectedRoute from "./components/protected-route.js";
+import { UserAuthContextProvider } from "./context/user-auth-context.js";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Button type="primary">Login</Button>
-        <Button>Sign-up</Button>
-        <Button type="dashed">Dashed Button</Button>
-        <br />
-        <Button type="text">Text Button</Button>
-        <Button type="link">Link Button</Button>
-      </header>
-    </div>
+    <UserAuthContextProvider>
+      <Router>
+        <Routes>
+          <Route
+            path="/dashbord"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </Router>
+    </UserAuthContextProvider>
   );
 }
 
