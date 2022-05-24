@@ -10,7 +10,6 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 const Login = () => {
   const { logIn } = useUserAuth();
   const onFinish = async (values) => {
-    console.log("Received values of form: ", values);
     try {
       await logIn(values.email, values.password);
       navigate("/dashbord");

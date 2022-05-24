@@ -2,8 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCI5uyjXjjGnvMIMtpg3Mt3VnE39g8Ue5M",
-  authDomain: "solnat-698bf.firebaseapp.com",
+  apiKey: process.env.FIREBASE_APIKEY,
+  authDomain: process.env.FIREBASE_AUTHDOMAIN,
   databaseURL:
     "https://solnat-698bf-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "solnat-698bf",

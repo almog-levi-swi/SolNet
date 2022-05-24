@@ -70,7 +70,6 @@ const Signup = () => {
   const [kids, setKids] = useState(0);
   const [student, setStudent] = useState(false);
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
   };
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
