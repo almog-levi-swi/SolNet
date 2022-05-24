@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_APIKEY,
+  apiKey: 'AIzaSyCI5uyjXjjGnvMIMtpg3Mt3VnE39g8Ue5M',
   authDomain: process.env.FIREBASE_AUTHDOMAIN,
   databaseURL:
     "https://solnat-698bf-default-rtdb.europe-west1.firebasedatabase.app",
