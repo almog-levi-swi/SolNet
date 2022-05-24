@@ -17,13 +17,13 @@ const TableEmployees = ({ employees }) => {
     setIsModalVisible(false);
   };
 
-  const [selectedEmploy, setSelectedEmploy] = useState({});
+  const [selectedEmployee, setselectedEmployee] = useState({});
 
   return (
     <>
       <Modal
         info
-        title={selectedEmploy.name}
+        title={selectedEmployee.name}
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -48,10 +48,10 @@ const TableEmployees = ({ employees }) => {
         </Row>
         <Row>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmploy.name?.split(" ")[0] || ""}
+            {selectedEmployee.name?.split(" ")[0] || ""}
           </Col>
           <Col span={6} style={{ fontSize: 16 }}>
-            {selectedEmploy.name?.split(" ")[1] || ""}
+            {selectedEmployee.name?.split(" ")[1] || ""}
           </Col>
         </Row>
         <br />
@@ -65,10 +65,10 @@ const TableEmployees = ({ employees }) => {
         </Row>
         <Row>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmploy.role}
+            {selectedEmployee.role}
           </Col>
           <Col span={6} style={{ fontSize: 16 }}>
-            {selectedEmploy.department}
+            {selectedEmployee.department}
           </Col>
         </Row>
         <br />
@@ -82,10 +82,10 @@ const TableEmployees = ({ employees }) => {
         </Row>
         <Row>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmploy.birthdate}
+            {selectedEmployee.birthdate}
           </Col>
           <Col span={6} style={{ fontSize: 16 }}>
-            {selectedEmploy.joindate}
+            {selectedEmployee.joindate}
           </Col>
         </Row>
         <br />
@@ -99,10 +99,10 @@ const TableEmployees = ({ employees }) => {
         </Row>
         <Row>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmploy.shirtsize}
+            {selectedEmployee.shirtsize}
           </Col>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmploy.food}
+            {selectedEmployee.food}
           </Col>
         </Row>
         <br />
@@ -116,10 +116,10 @@ const TableEmployees = ({ employees }) => {
         </Row>
         <Row>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmploy.email}
+            {selectedEmployee.email}
           </Col>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmploy.phone}
+            {selectedEmployee.phone}
           </Col>
         </Row>
         <br />
@@ -133,12 +133,12 @@ const TableEmployees = ({ employees }) => {
         </Row>
         <Row>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmploy.kids > 0
-              ? `${selectedEmploy.married} (+${selectedEmploy.kids})`
-              : selectedEmploy.married}
+            {selectedEmployee.kids > 0
+              ? `${selectedEmployee.married} (+${selectedEmployee.kids})`
+              : selectedEmployee.married}
           </Col>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmploy.gender}
+            {selectedEmployee.gender}
           </Col>
         </Row>
       </Modal>
@@ -150,7 +150,7 @@ const TableEmployees = ({ employees }) => {
           return {
             onClick: () => {
               showModal();
-              setSelectedEmploy(record);
+              setselectedEmployee(record);
             },
           };
         }}
