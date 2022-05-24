@@ -1,5 +1,6 @@
 {
   "name": "solnet",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +10,8 @@
     "antd": "^4.20.6",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "firebase": "^9.8.1",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "victory": "^36.4.0",
     "web-vitals": "^2.1.4"
@@ -17,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "jest": "jest",
+    "type": "module"
   },
   "eslintConfig": {
     "extends": [
@@ -36,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
   }
 }

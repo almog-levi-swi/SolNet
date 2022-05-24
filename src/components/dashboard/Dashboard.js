@@ -7,7 +7,6 @@ import { Divider, Col, Row, Card } from 'antd';
 
 export const Dashboard = () => {
     const [graphBy, setGraphBy] = useState(groupByTypes.food);
-
     return (
         <Card style={{ textAlign: 'center' }}
             bordered={false}
@@ -27,5 +26,4 @@ export const Dashboard = () => {
         </Card>
     )
 }
-
 
