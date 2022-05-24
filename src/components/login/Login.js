@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -15,10 +15,11 @@ export const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
 
   const [user, setUser] = useState({});
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, []);
 
   const register = async () => {
     try {
@@ -45,7 +46,6 @@ export const Login = () => {
       console.log(error.message);
     }
   };
-
   const logout = async () => {
     await signOut(auth);
   };
@@ -66,12 +66,10 @@ export const Login = () => {
             setRegisterPassword(event.target.value);
           }}
         />
-
         <button onClick={register}> Create User</button>
       </div>
-
       <div>
-        <h3> Login </h3>
+        <h3> Login User </h3>
         <input
           placeholder="Email..."
           onChange={(event) => {
@@ -84,13 +82,10 @@ export const Login = () => {
             setLoginPassword(event.target.value);
           }}
         />
-
         <button onClick={login}> Login</button>
       </div>
-
       <h4> User Logged In: </h4>
       {user?.email}
-
       <button onClick={logout}> Sign Out </button>
     </div>
   );
