@@ -505,27 +505,6 @@ const Signup = () => {
           </Col>
         </Row>
 
-        {/* <Row span={50} offset={10}>
-          {/* <Form.Item
-            name="student"
-            defaultChecked="unchecked"
-            wrapperCol={{ offset: 6, span: 10 }}
-            onChange={(e) => setStudent(e.target.checked)}
-          >
-            <label>
-              Student?
-              <Checkbox />
-            </label>
-          </Form.Item>
-
-          {student ? (
-            <Form.Item name="end date" label="End Date" {...endDateConfig}>
-              <DatePicker />
-            </Form.Item>
-
-          ) : null} */}
-        {/* </Row> */}
-
         <Form.Item {...tailFormItemLayout} style={{ width: '68%', margin: 'center' }}>
           <Button type="primary" htmlType="submit" style={{ backgroundColor: Colors.BUTTON, fontWeight: 'bold', width: '120px', height: '50px', fontSize: '20px' }}>
             Register
