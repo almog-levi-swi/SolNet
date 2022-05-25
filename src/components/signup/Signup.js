@@ -28,16 +28,6 @@ const birthDateConfig = {
   ],
 };
 
-const endDateConfig = {
-  rules: [
-    {
-      type: "object",
-      required: true,
-      message: "Please select your End date!",
-    },
-  ],
-};
-
 const joinDateConfig = {
   rules: [
     {
@@ -399,7 +389,7 @@ const Signup = () => {
             <Col span={5}>
               <Form.Item
                 name="food_preferences"
-                label="Food Preferences"
+                label="Food"
                 rules={[
                   {
                     required: true,
@@ -423,7 +413,7 @@ const Signup = () => {
             <Col span={5}>
               <Form.Item
                 name="phone"
-                label="Phone Number"
+                label="Phone"
                 rules={[
                   {
                     required: true,
@@ -444,7 +434,7 @@ const Signup = () => {
             <Col span={5}>
               <Form.Item
                 name="marrige"
-                label="Married?"
+                label="Married"
                 rules={[
                   {
                     required: true,
@@ -510,7 +500,7 @@ const Signup = () => {
             </Form.Item>
 
             {student ? (
-              <Form.Item name="end date" label="End Date" {...endDateConfig}>
+              <Form.Item name="end date" label="End Date">
                 <DatePicker />
               </Form.Item>
             ) : null}
