@@ -479,7 +479,7 @@ const Signup = () => {
             <Form.Item
               name="student"
               defaultChecked="unchecked"
-              wrapperCol={{ offset: 6, span: 10 }}
+              wrapperCol={{ span: 1000 }}
               onChange={(e) => setStudent(e.target.checked)}
             >
               <label>
