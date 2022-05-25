@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Routes>
           <Route
-            path="/dashbord"
+            path="/dashboard"
             element={
               <ProtectedRoute>
                 <Card style={{ textAlign: 'center', padding: '30px', borderRadius: '10px', backgroundColor: 'white', margin: '3%' }}>
@@ -40,8 +40,3 @@ function App() {
 
 export default App;
 
-/*
-<div style={{ width: '80%', height: '50vh' }}>
-      <Dashboard />
-    </div>
-*/
