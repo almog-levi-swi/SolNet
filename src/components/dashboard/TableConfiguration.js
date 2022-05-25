@@ -1,28 +1,26 @@
 export const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
+    title: "First Name",
+    dataIndex: "first_name",
     defaultSortOrder: "descend",
-    sorter: (a, b) => (a.name > b.name ? 1 : -1),
+    sorter: (a, b) => (a.first_name > b.first_name ? 1 : -1),
     render: (text) => {
       return <a>{text}</a>;
     },
   },
   {
-    title: "Gender",
-    dataIndex: "gender",
+    title: "Last Name",
+    dataIndex: "last_name",
     defaultSortOrder: "descend",
-    sorter: (a, b) => (a.gender > b.gender ? 1 : -1),
+    sorter: (a, b) => (a.last_name > b.last_name ? 1 : -1),
+    render: (text) => {
+      return <a>{text}</a>;
+    },
   },
   {
     title: "Birth Date",
     dataIndex: "birthdate",
     sorter: (a, b) => (a.birthdate > b.birthdate ? 1 : -1),
-  },
-  {
-    title: "Join Date",
-    dataIndex: "joindate",
-    sorter: (a, b) => (a.joindate > b.joindate ? 1 : -1),
   },
   {
     title: "Role",
@@ -41,13 +39,8 @@ export const columns = [
   },
   {
     title: "Full Time",
-    dataIndex: "student",
-    sorter: (a, b) => (a.student > b.student ? 1 : -1),
-  },
-  {
-    title: "Graduation date",
-    dataIndex: "graduation",
-    sorter: (a, b) => (a.graduation > b.graduation ? 1 : -1),
+    dataIndex: "full_time",
+    sorter: (a, b) => (a.full_time > b.full_time ? 1 : -1),
   },
   {
     title: "Address",

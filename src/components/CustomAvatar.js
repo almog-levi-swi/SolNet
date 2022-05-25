@@ -10,7 +10,7 @@ const CustomAvatar = ({ firstName, lastName, date }) => {
       overlayStyle={{ maxWidth: "250px" }}
       color={"orange"}
     >
-      <Avatar style={{ backgroundColor: `#${randomColor}` }} size="large">
+      <Avatar style={{ backgroundColor: `#${randomColor}` }}>
         {firstName}
       </Avatar>
     </Tooltip>
