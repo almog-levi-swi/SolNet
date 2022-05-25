@@ -71,15 +71,6 @@ export const Dashboard = () => {
         <Col span={12}>
           <Row justify="space-around" align="middle">
             <Col span={20}>
-              <h2
-                style={{
-                  textAlign: "left",
-                  marginTop: "25px",
-                  marginLeft: "50px",
-                }}
-              >
-                Statistics
-              </h2>
               <Chart data={convertedEmployees} graphBy={graphBy} />
               <GraphBy setGraphBy={setGraphBy} graphBy={graphBy} />
             </Col>
