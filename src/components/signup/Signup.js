@@ -11,6 +11,7 @@ import {
   Row,
   Col,
   Layout,
+  Divider
 } from "antd";
 
 const { Header, Content } = Layout;
@@ -99,8 +100,10 @@ const Signup = () => {
   );
 
   return (
-    <Layout style={{border: 'solid #DCDCDC 10px'}}>
-      <Header style={{ fontSize: 30, backgroundColor: "#F99D1D", color: 'white', textAlign: 'center' , fontWeight: 'bold'}}>Signup</Header>  
+    // <Layout style={{border: 'solid #DCDCDC 10px'}}>
+      <>
+      
+      <Divider orientation="center"><h1>Sign Up</h1></Divider>
       <Content style={{margin: '80px'}}>
         <Form
           {...formItemLayout}
@@ -203,7 +206,7 @@ const Signup = () => {
             <Col span={5}>
               <Form.Item
                 name="confirm"
-                label="Confirm Password"
+                label="Confirm"
                 dependencies={["password"]}
                 hasFeedback
                 rules={[
@@ -361,27 +364,7 @@ const Signup = () => {
             </Col>
 
             <Col span={5}>
-              <Form.Item
-                name="gender"
-                label="Gender"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please select gender!",
-                  },
-                ]}
-              >
-                <Select placeholder="select your gender">
-                  <Option value="male">Male</Option>
-                  <Option value="female">Female</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row justify="center">
-            <Col span={5}>
-              <Form.Item
+            <Form.Item
                 name="marrige"
                 label="Married?"
                 rules={[
@@ -396,10 +379,13 @@ const Signup = () => {
                   <Option value="no">No</Option>
                 </Select>
               </Form.Item>
-            </Col>
 
-            <Col span={5}>
-              <Form.Item
+            </Col>
+          </Row>
+
+          <Row >
+            <Col span={5} offset={30}>
+            <Form.Item
                 name="num_of_kids"
                 label="Number of kids"
                 rules={[
@@ -427,13 +413,18 @@ const Signup = () => {
                 </Select>
               </Form.Item>
             </Col>
+
+            <DynamicKids kids={kids} birthDateConfig={birthDateConfig} />
+
+            <Col span={5}>
+
+            </Col>
           </Row>
 
-          <DynamicKids kids={kids} birthDateConfig={birthDateConfig} />
 
-          <Row>
-            <Col span={3} offset={7}>
-              <Form.Item
+
+          <Row span={50} offset={10}>
+            <Form.Item
                 name="student"
                 defaultChecked="unchecked"
                 wrapperCol={{ offset: 6, span: 10 }}
@@ -444,24 +435,24 @@ const Signup = () => {
                   <Checkbox />
                 </label>
               </Form.Item>
-            </Col>
-            {student ? (
-              <Col span={5} offset={2}>
+
+              {student ? (
                 <Form.Item name="end date" label="End Date" {...endDateConfig}>
                   <DatePicker />
                 </Form.Item>
-              </Col>
+
             ) : null}
           </Row>
 
-          <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit" style={{  backgroundColor: "#F99D1D", fontWeight: 'bold', fontSize: '16px'}}>
+          <Form.Item {...tailFormItemLayout} style={{width: '68%', margin: 'center'}}>
+            <Button type="primary" htmlType="submit" style={{ backgroundColor: "#ffa5005c", fontWeight: 'bold', width: '120px', height: '50px', fontSize: '20px'}}>
               Register
             </Button>
           </Form.Item>
         </Form>
       </Content>
-    </Layout>
+     {/* </Layout> */}
+      </>
   );
 };
 
