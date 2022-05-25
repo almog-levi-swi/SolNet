@@ -1,10 +1,13 @@
 const initializeApp = require('firebase/app');
-const { app } = require('./firebase-config.js');
-const { collection, getDocs } = require('firebase/firestore/lite');
-const { getDatabase, ref, child, get, push, set, remove } = require('firebase/database');
+// >>> const { app } = require('./firebase-config.js');
+// >>> const { collection, getDocs } = require('firebase/firestore/lite');
+// >>> const { getDatabase, ref, child, get, push, set, remove } = require('firebase/database');
+import { app } from './firebase-config.js';
+import { collection, getDocs } from 'firebase/firestore/lite';
+import { getDatabase, ref, child, get, push, set, remove } from 'firebase/database';
 
 
-async function getEmployees(fieldName = null, fieldValue = null) {
+export async function getEmployees(fieldName = null, fieldValue = null) {
     const db = getDatabase();
     const dbRef = ref(db);
     const employeesRef = child(dbRef, 'employees')
@@ -21,7 +24,7 @@ async function getEmployees(fieldName = null, fieldValue = null) {
     });
 }
 
-function filterOrderBy(data, fieldName, fieldValue) {
+export function filterOrderBy(data, fieldName, fieldValue) {
   const dataArray = []
   Object.keys(data).forEach(key => {
     dataArray.push({ key: key, record: data[key] })
@@ -44,7 +47,7 @@ function filterOrderBy(data, fieldName, fieldValue) {
   return sortedArray.filter(entry => entry.record[fieldName] === fieldValue)
 }
 
-async function insertEmployee(employee) {
+export async function insertEmployee(employee) {
     const db = getDatabase();
     const dbRef = ref(db);
     const newEmpRef = push(child(dbRef, 'employees'))
@@ -52,14 +55,14 @@ async function insertEmployee(employee) {
     return newEmpRef.key
 }
 
-async function updateEmployee(key, employee) {
+export async function updateEmployee(key, employee) {
     const db = getDatabase();
     const dbRef = ref(db);
     const newEmpRef = ref(db, `employees/${key}`)
     await set(newEmpRef, employee)
 }
 
-async function getEmployee(key) {
+export async function getEmployee(key) {
     const db = getDatabase();
     const dbRef = ref(db);
     return await get(child(dbRef, `employees/${key}`)).then((snapshot) => {
@@ -75,11 +78,11 @@ async function getEmployee(key) {
     });
 }
 
-async function deleteEmployee(key) {
+export async function deleteEmployee(key) {
     const db = getDatabase();
     const dbRef = ref(db);
     const newEmpRef = ref(db, `employees/${key}`)
     await remove(newEmpRef)
 }
 
-module.exports = { getEmployees, insertEmployee, updateEmployee, getEmployee, deleteEmployee };
+// >>> module.exports = { getEmployees, insertEmployee, updateEmployee, getEmployee, deleteEmployee };
