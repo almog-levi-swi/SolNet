@@ -450,8 +450,8 @@ const Signup = () => {
             </Col>
           </Row>
 
-          <Row>
-            <Col span={5} offset={30}>
+          <Row justify="center">
+            <Col span={5}>
               <Form.Item
                 name="num_of_kids"
                 label="Number of kids"
@@ -480,17 +480,15 @@ const Signup = () => {
                 </Select>
               </Form.Item>
             </Col>
-
-            <DynamicKids kids={kids} birthDateConfig={birthDateConfig} />
-
             <Col span={5}></Col>
           </Row>
+            <DynamicKids kids={kids} birthDateConfig={birthDateConfig} />
 
-          <Row span={50} offset={10}>
+          <Row style={{ marginLeft: '32%'}}>
             <Form.Item
               name="student"
               defaultChecked="unchecked"
-              wrapperCol={{ offset: 6, span: 10 }}
+              wrapperCol={{ span: 1000 }}
               onChange={(e) => setStudent(e.target.checked)}
             >
               <label>
