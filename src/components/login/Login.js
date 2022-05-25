@@ -16,7 +16,11 @@ const Login = () => {
       await logIn(values.email, values.password);
       navigate("/dashbord");
     } catch (err) {
-      setError(err.message);
+      console.log("err.code :>> ", err.code);
+      switch (err.code) {
+        case "auth/wrong-password":
+          console.log("Wrong password");
+      }
     }
   };
 
@@ -51,8 +55,6 @@ const Login = () => {
           />
         </Form.Item>
         <Form.Item>
-
-
           <a style={{ float: "right" }} href="">
             Forgot password
           </a>
