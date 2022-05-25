@@ -513,7 +513,6 @@ const Signup = () => {
           </Form.Item>
         </Form>
       </Content>
-      {/* </Layout> */}
     </>
   );
 };
