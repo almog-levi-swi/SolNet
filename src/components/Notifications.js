@@ -1,19 +1,19 @@
 import React from "react";
 import CustomAvatar from "./CustomAvatar.js";
-import { Avatar, Card, Divider, Row, Empty } from "antd";
+import { Avatar, Card, Row, Empty } from "antd";
 const Notifications = ({ employees }) => {
   return (
     <div>
-      <Row style={{ marginBottom: '20px' }}>
-        <Card title="Birth date" bordered={true} >
+      <Row style={{ marginBottom: "20px" }}>
+        <Card title="Birth date" bordered={true}>
           {employees.length > 0 ? (
             <Avatar.Group>
               {/** Sholud filter on employees and create array with relevant birthday employees */}
               {employees.map((employee) => (
                 <CustomAvatar
                   key={`${employee.id}-birthdate`}
-                  firstName={employee.firstname}
-                  lastName={employee.lastname}
+                  firstName={employee.first_name}
+                  lastName={employee.last_name}
                   date={employee.birthdate}
                 />
               ))}
@@ -31,9 +31,9 @@ const Notifications = ({ employees }) => {
               {employees.map((employee) => (
                 <CustomAvatar
                   key={`${employee.id}-joindate`}
-                  firstName={employee.firstname}
-                  lastName={employee.lastname}
-                  date={employee.birthdate}
+                  firstName={employee.first_name}
+                  lastName={employee.last_name}
+                  date={employee.joinDate}
                 />
               ))}
             </Avatar.Group>
@@ -42,7 +42,6 @@ const Notifications = ({ employees }) => {
           )}
         </Card>
       </Row>
-
     </div>
   );
 };

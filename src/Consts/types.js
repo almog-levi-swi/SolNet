@@ -1,7 +1,6 @@
 export const groupByTypes = {
-    food: 'food',
-    shirtsize: 'shirtsize',
-    married: 'married',
-    student: 'student',
-
-}
+  food: "food_preferences",
+  shirtsize: "shirt_size",
+  married: "married",
+  student: "full_time",
+};

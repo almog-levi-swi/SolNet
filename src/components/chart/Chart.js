@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import {
     VictoryBar,
     VictoryChart,
     VictoryAxis,
     VictoryTheme,
-    VictoryLabel
-} from 'victory';
+    VictoryLabel,
+} from "victory";
 
 export const Chart = ({ data, graphBy }) => {
     const quantity = 'quantity';
@@ -49,5 +49,3 @@ export const Chart = ({ data, graphBy }) => {
         </>
     );
 }
-
-
