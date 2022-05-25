@@ -6,13 +6,25 @@ import { groupByTypes } from "../../Consts/types.js";
 import { Divider, Col, Row, Card } from "antd";
 import TableEmployees from "./TableEmployees.js";
 import Notifications from "../Notifications.js";
+import { useNavigate } from "react-router";
+import { useUserAuth } from "../../context/user-auth-context.js";
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const convertDateToString = (date) => {
     return `${date.dd}/${date.mm}/${date.yy}`;
   };
   const [graphBy, setGraphBy] = useState(groupByTypes.food);
   const [convertedEmployees, setConvertedEmployees] = useState([]);
+  const { logOut } = useUserAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   convertedEmployees.length === 0 &&
     getEmployees().then((employees) => {
       const convertedEmployees = employees.map((employee) => {
@@ -45,6 +57,7 @@ export const Dashboard = () => {
           margin: "auto",
         }}
       >
+        <button onClick={handleLogout}>Logout</button>
         <Divider orientation="center">
           <h1>Dashboard</h1>
         </Divider>
@@ -66,3 +79,4 @@ export const Dashboard = () => {
     </div>
   );
 };
+export default Dashboard;

@@ -9,12 +9,14 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 const Login = () => {
   const { logIn } = useUserAuth();
+  const [error, setError] = useState("");
+
   const onFinish = async (values) => {
     try {
       await logIn(values.email, values.password);
       navigate("/dashbord");
     } catch (err) {
-      console.log(err.message);
+      setError(err.message);
     }
   };
 
@@ -49,9 +51,7 @@ const Login = () => {
           />
         </Form.Item>
         <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+
 
           <a style={{ float: "right" }} href="">
             Forgot password
@@ -62,6 +62,7 @@ const Login = () => {
           <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
             Log in
           </Button>
+          {error ? error : ""}
         </Form.Item>
       </Form>
       <div>
