@@ -28,7 +28,7 @@ function App() {
             </Card>
           } />
           <Route path="/signup" element={
-            <Card style={{ padding: '30px', borderRadius: '10px', backgroundColor: 'white', margin: '3%' }}>
+            <Card style={{ padding: '30px', borderRadius: '10px', backgroundColor: 'white', margin: '3% 30%' }}>
               <Signup />
             </Card>
           } />
