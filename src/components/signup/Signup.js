@@ -13,6 +13,7 @@ import {
   Col,
   Layout,
   Divider,
+  notification,
 } from "antd";
 
 const { Header, Content } = Layout;
@@ -78,6 +79,13 @@ const tailFormItemLayout = {
   },
 };
 
+const openNotificationWithIcon = (type, message, description) => {
+  notification[type]({
+    message,
+    description,
+  });
+};
+
 const Signup = () => {
   const [form] = Form.useForm();
   const [kids, setKids] = useState(0);
@@ -119,8 +127,23 @@ const Signup = () => {
       },
     };
 
-    insertEmployee(newEmployee);
+    insertEmployee(newEmployee)
+      .then((_resp) =>
+        openNotificationWithIcon(
+          "success",
+          "New Employee was created successfully",
+          `${values["first name"]} ${values["last name"]} was created successfully`
+        )
+      )
+      .catch((_e) =>
+        openNotificationWithIcon(
+          "error",
+          "Failed to create new Employee",
+          `There is an error`
+        )
+      );
   };
+
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select
