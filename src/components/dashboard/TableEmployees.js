@@ -22,7 +22,6 @@ const TableEmployees = ({ employees }) => {
 
   return (
     <>
-      <h1>Employee Details</h1>
       <Modal
         info
         title={selectedEmployee.name}

@@ -8,7 +8,7 @@ const CustomAvatar = ({ firstName, lastName, date }) => {
       title={`${firstName} ${lastName} ${date}`}
       placement="top"
       overlayStyle={{ maxWidth: "250px" }}
-      color={"orange"}
+      color={"grey"}
     >
       <Avatar style={{ backgroundColor: `#${randomColor}` }}>
         {firstName}
