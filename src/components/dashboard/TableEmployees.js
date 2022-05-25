@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table, Modal, Row, Col } from "antd";
-import { columns } from "./TableConfiguration";
+import { columns } from "./TableConfiguration.js";
 
 const TableEmployees = ({ employees }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -48,10 +48,10 @@ const TableEmployees = ({ employees }) => {
         </Row>
         <Row>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmployee.name?.split(" ")[0] || ""}
+            {selectedEmployee.firstname}
           </Col>
           <Col span={6} style={{ fontSize: 16 }}>
-            {selectedEmployee.name?.split(" ")[1] || ""}
+            {selectedEmployee.lastname}
           </Col>
         </Row>
         <br />
