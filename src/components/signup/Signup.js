@@ -29,6 +29,16 @@ const birthDateConfig = {
   ],
 };
 
+const endDateConfig = {
+  rules: [
+    {
+      type: "object",
+      required: true,
+      message: "Please select your End date!",
+    },
+  ],
+};
+
 const joinDateConfig = {
   rules: [
     {
