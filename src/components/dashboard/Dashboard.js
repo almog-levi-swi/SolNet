@@ -8,61 +8,56 @@ import TableEmployees from "./TableEmployees.js";
 import Notifications from "../Notifications.js";
 
 export const Dashboard = () => {
-  const convertDateToString = (date) => {
-    return `${date.dd}/${date.mm}/${date.yy}`;
-  };
-  const [graphBy, setGraphBy] = useState(groupByTypes.food);
-  const [convertedEmployees, setConvertedEmployees] = useState([]);
-  convertedEmployees.length === 0 &&
-    getEmployees().then((employees) => {
-      const convertedEmployees = employees.map((employee) => {
-        employee.record.full_time = `${employee.record.full_time}`;
-        employee.record.married = `${employee.record.married}`;
-        employee.record.has_children = `${employee.record.has_children}`;
-        employee.record.birthdate = convertDateToString(
-          employee.record.birthdate
-        );
-        employee.record.joinDate = convertDateToString(
-          employee.record.joinDate
-        );
-        employee.record.study_end_date = convertDateToString(
-          employee.record.study_end_date
-        );
-        return employee.record;
-      });
-      setConvertedEmployees(convertedEmployees);
-    });
-  console.log(convertedEmployees);
-  return (
-    <div style={{ backgroundColor: "orange" }}>
-      <Card
-        style={{
-          textAlign: "center",
-          padding: "30px",
-          borderRadius: "10px",
-          backgroundColor: "white",
-          width: "85%",
-          margin: "auto",
-        }}
-      >
-        <Divider orientation="center">
-          <h1>Dashboard</h1>
-        </Divider>
-        <Row justify="space-around" align="middle">
-          <Col span={6}>
-            <Notifications employees={convertedEmployees} />
-          </Col>
-          <Col span={12}>
-            <GraphBy setGraphBy={setGraphBy} />
-            <Chart data={convertedEmployees} graphBy={graphBy} />
-          </Col>
-        </Row>
-        <Row justify="space-around" align="middle">
-          <Col span={24}>
-            <TableEmployees employees={convertedEmployees} />
-          </Col>
-        </Row>
-      </Card>
-    </div>
-  );
+    const [graphBy, setGraphBy] = useState(groupByTypes.food);
+    const [convertedEmployees, setConvertedEmployees] = useState([]);
+
+
+    const convertDateToString = (date) => {
+        return `${date.dd}/${date.mm}/${date.yy}`;
+    };
+
+    convertedEmployees.length === 0 &&
+        getEmployees().then((employees) => {
+            const convertedEmployees = employees.map((employee) => {
+                employee.record.full_time = `${employee.record.full_time}`;
+                employee.record.married = `${employee.record.married}`;
+                employee.record.has_children = `${employee.record.has_children}`;
+                employee.record.birthdate = convertDateToString(
+                    employee.record.birthdate
+                );
+                employee.record.joinDate = convertDateToString(
+                    employee.record.joinDate
+                );
+                employee.record.study_end_date = convertDateToString(
+                    employee.record.study_end_date
+                );
+                return employee.record;
+            });
+            setConvertedEmployees(convertedEmployees);
+        });
+    console.log(convertedEmployees);
+    return (
+        <>
+            <Divider orientation="center"><h1>SolNet</h1></Divider>
+            <Row justify='space-around' align='middle'>
+                <Col span={8}>
+                    <Divider orientation='left'><b>Week Events</b></Divider>
+                    <Notifications employees={convertedEmployees} />
+                </Col>
+                <Col span={12}>
+
+                    <Row justify='space-around' align='middle'>
+                        <Col span={20}><Chart data={convertedEmployees} graphBy={graphBy} /></Col>
+                        <Col span={4}><GraphBy setGraphBy={setGraphBy} /></Col>
+                    </Row>
+                </Col>
+            </Row>
+            <Divider orientation='left'><h3>Employees Details</h3></Divider>
+            <Row justify='space-around' align='middle' >
+                <Col span={24}>
+                    <TableEmployees employees={convertedEmployees} />
+                </Col>
+            </Row>
+        </>
+    );
 };
