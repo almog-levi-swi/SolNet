@@ -8,31 +8,35 @@ import { UserAuthContextProvider } from "./context/user-auth-context.js";
 import { Card } from 'antd';
 function App() {
   return (
-    <Card style={{ textAlign: 'center', padding: '30px', borderRadius: '10px', backgroundColor: 'white', margin: '3%' }}>
-      <UserAuthContextProvider>
-        <Router>
-          <Routes>
-            <Route
-              path="/dashbord"
-              element={
-                <ProtectedRoute>
+
+    <UserAuthContextProvider>
+      <Router>
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Card style={{ textAlign: 'center', padding: '30px', borderRadius: '10px', backgroundColor: 'white', margin: '3%' }}>
                   <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </Router>
-      </UserAuthContextProvider>
-    </Card>
+                </Card>
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/" element={
+            <Card style={{ textAlign: 'center', padding: '30px', borderRadius: '10px', backgroundColor: 'white', margin: '10% 37%' }}>
+              <Login />
+            </Card>
+          } />
+          <Route path="/signup" element={
+            <Card style={{ padding: '30px', borderRadius: '10px', backgroundColor: 'white', margin: '3% 30%' }}>
+              <Signup />
+            </Card>
+          } />
+        </Routes>
+      </Router>
+    </UserAuthContextProvider>
   );
 }
 
 export default App;
 
-/*
-<div style={{ width: '80%', height: '50vh' }}>
-      <Dashboard />
-    </div>
-*/
