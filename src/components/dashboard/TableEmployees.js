@@ -21,6 +21,7 @@ const TableEmployees = ({ employees }) => {
 
   return (
     <>
+      <h1>Employee Details</h1>
       <Modal
         info
         title={selectedEmployee.name}
@@ -48,10 +49,10 @@ const TableEmployees = ({ employees }) => {
         </Row>
         <Row>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmployee.firstname}
+            {selectedEmployee.first_name}
           </Col>
           <Col span={6} style={{ fontSize: 16 }}>
-            {selectedEmployee.lastname}
+            {selectedEmployee.last_name}
           </Col>
         </Row>
         <br />
@@ -85,7 +86,7 @@ const TableEmployees = ({ employees }) => {
             {selectedEmployee.birthdate}
           </Col>
           <Col span={6} style={{ fontSize: 16 }}>
-            {selectedEmployee.joindate}
+            {selectedEmployee.joinDate}
           </Col>
         </Row>
         <br />
@@ -99,10 +100,10 @@ const TableEmployees = ({ employees }) => {
         </Row>
         <Row>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmployee.shirtsize}
+            {selectedEmployee.shirt_size}
           </Col>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmployee.food}
+            {selectedEmployee.food_preferences}
           </Col>
         </Row>
         <br />
@@ -128,7 +129,7 @@ const TableEmployees = ({ employees }) => {
             Married
           </Col>
           <Col span={12} style={{ fontSize: 12, backgroundColor: "#DCDCDC" }}>
-            Gender
+            Has Children
           </Col>
         </Row>
         <Row>
@@ -138,7 +139,7 @@ const TableEmployees = ({ employees }) => {
               : selectedEmployee.married}
           </Col>
           <Col span={12} style={{ fontSize: 16 }}>
-            {selectedEmployee.gender}
+            {selectedEmployee.has_children}
           </Col>
         </Row>
       </Modal>
