@@ -6,6 +6,7 @@ import {
 } from "../../context/user-auth-context.js";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { Background } from "victory";
 
 const Login = () => {
   const { logIn } = useUserAuth();
@@ -28,10 +29,11 @@ const Login = () => {
 
   return (
     <>
-      <h2>Welcome to Solnet</h2>
+      <h1>Welcome to Solnet</h1>
+      <br />
       <Form
         name="normal_login"
-        style={{ maxWidth: "300px" }}
+        style={{ maxWidth: "300px", margin: "auto" }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
@@ -55,13 +57,15 @@ const Login = () => {
           />
         </Form.Item>
         <Form.Item>
-          <a style={{ float: "right" }} href="">
-            Forgot password
-          </a>
+          <a href="">Forgot password</a>
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ width: "80%", backgroundColor: "#e4a833" }}
+          >
             Log in
           </Button>
           {error ? error : ""}
