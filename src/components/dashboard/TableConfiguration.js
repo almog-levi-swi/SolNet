@@ -5,7 +5,7 @@ export const columns = [
     defaultSortOrder: "descend",
     sorter: (a, b) => (a.first_name > b.first_name ? 1 : -1),
     render: (text) => {
-      return <a>{text}</a>;
+      return text;
     },
   },
   {
@@ -14,7 +14,7 @@ export const columns = [
     defaultSortOrder: "descend",
     sorter: (a, b) => (a.last_name > b.last_name ? 1 : -1),
     render: (text) => {
-      return <a>{text}</a>;
+      return text;
     },
   },
   {

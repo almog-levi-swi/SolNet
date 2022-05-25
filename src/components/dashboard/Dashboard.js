@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Chart } from "../chart/Chart.js";
 import { GraphBy } from "../GraphBy/graphBy.js";
 import { groupByTypes } from "../../Consts/types.js";
-import { Divider, Col, Row, Card } from "antd";
+import { Divider, Col, Row } from "antd";
 import TableEmployees from "./TableEmployees.js";
 import Notifications from "../Notifications.js";
 import { useNavigate } from "react-router";
@@ -46,27 +46,42 @@ export const Dashboard = () => {
       });
       setConvertedEmployees(convertedEmployees);
     });
-  console.log(convertedEmployees);
   return (
     <>
-      <button onClick={handleLogout}>Logout</button>
+      <button
+        onClick={handleLogout}
+        style={{
+          float: "right",
+          backgroundColor: "transparent",
+          border: "none",
+          cursor: "pointer",
+          color: "#1890ff",
+        }}
+      >
+        Logout
+      </button>
       <Divider orientation="center">
         <h1>SolNet</h1>
       </Divider>
       <Row justify="space-around" align="middle">
         <Col span={8}>
-          <Divider orientation="left">
-            <b>Week Events</b>
-          </Divider>
+          <h2 style={{ textAlign: "left", marginLeft: "20px" }}>Week Events</h2>
           <Notifications employees={convertedEmployees} />
         </Col>
         <Col span={12}>
           <Row justify="space-around" align="middle">
             <Col span={20}>
+              <h2
+                style={{
+                  textAlign: "left",
+                  marginTop: "25px",
+                  marginLeft: "50px",
+                }}
+              >
+                Statistics
+              </h2>
               <Chart data={convertedEmployees} graphBy={graphBy} />
-            </Col>
-            <Col span={4}>
-              <GraphBy setGraphBy={setGraphBy} />
+              <GraphBy setGraphBy={setGraphBy} graphBy={graphBy} />
             </Col>
           </Row>
         </Col>
