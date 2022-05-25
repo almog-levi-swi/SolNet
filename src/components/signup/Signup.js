@@ -1,5 +1,6 @@
 import DynamicKids from "./DynamicKids.js";
 import React, { useState } from "react";
+import { insertEmployee } from "../../firebaseDB.js";
 
 import {
   Button,
@@ -11,7 +12,8 @@ import {
   Row,
   Col,
   Layout,
-  Divider
+  Divider,
+  notification,
 } from "antd";
 
 const { Header, Content } = Layout;
@@ -22,16 +24,6 @@ const birthDateConfig = {
       type: "object",
       required: true,
       message: "Please select your birth date!",
-    },
-  ],
-};
-
-const endDateConfig = {
-  rules: [
-    {
-      type: "object",
-      required: true,
-      message: "Please select your End date!",
     },
   ],
 };
@@ -77,13 +69,71 @@ const tailFormItemLayout = {
   },
 };
 
+const openNotificationWithIcon = (type, message, description) => {
+  notification[type]({
+    message,
+    description,
+  });
+};
+
 const Signup = () => {
   const [form] = Form.useForm();
   const [kids, setKids] = useState(0);
   const [student, setStudent] = useState(false);
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    const newEmployee = {
+      address: values.address,
+      birthdate: {
+        dd: values["birth date"].toDate().getDay() + 1,
+        mm: values["birth date"].toDate().getMonth(),
+        yy: values["birth date"].toDate().getFullYear(),
+      },
+      department: values.department,
+      email: values.email,
+      emergency_contact: {
+        name: "Keren Singer",
+        phone: "05212345",
+      },
+      first_name: values["first name"],
+      food_preferences: values.food_preferences,
+      full_time: !values.student,
+      has_children: values.num_of_kids === "0",
+      is_admin: false,
+      joinDate: {
+        dd: values["join date"].toDate().getDay() + 1,
+        mm: values["join date"].toDate().getMonth(),
+        yy: values["join date"].toDate().getFullYear(),
+      },
+      last_name: values["last name"],
+      married: values.marrige,
+      password: values.password,
+      phone: values.phone,
+      role: values.role,
+      shirt_size: values.shirt_size,
+      study_end_date: {
+        dd: values["end date"].toDate().getDay() + 1,
+        mm: values["end date"].toDate().getMonth(),
+        yy: values["end date"].toDate().getFullYear(),
+      },
+    };
+
+    insertEmployee(newEmployee)
+      .then((_resp) =>
+        openNotificationWithIcon(
+          "success",
+          "New Employee was created successfully",
+          `${values["first name"]} ${values["last name"]} was created successfully`
+        )
+      )
+      .catch((_e) =>
+        openNotificationWithIcon(
+          "error",
+          "Failed to create new Employee",
+          `There is an error`
+        )
+      );
   };
+
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select
@@ -100,11 +150,11 @@ const Signup = () => {
   );
 
   return (
-    // <Layout style={{border: 'solid #DCDCDC 10px'}}>
-      <>
-      
-      <Divider orientation="center"><h1>Sign Up</h1></Divider>
-      <Content style={{margin: '80px'}}>
+    <>
+      <Divider orientation="center">
+        <h1>Sign Up</h1>
+      </Divider>
+      <Content style={{ margin: "80px" }}>
         <Form
           {...formItemLayout}
           form={form}
@@ -128,7 +178,10 @@ const Signup = () => {
                   },
                 ]}
               >
-                <Input placeholder="Your first name" style={{borderRadius: '8px'}}/>
+                <Input
+                  placeholder="Your first name"
+                  style={{ borderRadius: "8px" }}
+                />
               </Form.Item>
             </Col>
 
@@ -144,7 +197,10 @@ const Signup = () => {
                   },
                 ]}
               >
-                <Input placeholder="Your last name" style={{borderRadius: '8px'}}/>
+                <Input
+                  placeholder="Your last name"
+                  style={{ borderRadius: "8px" }}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -165,7 +221,10 @@ const Signup = () => {
                   },
                 ]}
               >
-                <Input placeholder="Your email" style={{borderRadius: '8px'}}/>
+                <Input
+                  placeholder="Your email"
+                  style={{ borderRadius: "8px" }}
+                />
               </Form.Item>
             </Col>
 
@@ -181,7 +240,10 @@ const Signup = () => {
                   },
                 ]}
               >
-                <Input placeholder="Your address" style={{borderRadius: '8px'}}/>
+                <Input
+                  placeholder="Your address"
+                  style={{ borderRadius: "8px" }}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -199,7 +261,10 @@ const Signup = () => {
                 ]}
                 hasFeedback
               >
-                <Input.Password placeholder="Your password" style={{borderRadius: '8px'}}/>
+                <Input.Password
+                  placeholder="Your password"
+                  style={{ borderRadius: "8px" }}
+                />
               </Form.Item>
             </Col>
 
@@ -229,7 +294,7 @@ const Signup = () => {
                   }),
                 ]}
               >
-                <Input.Password style={{borderRadius: '8px'}}/>
+                <Input.Password style={{ borderRadius: "8px" }} />
               </Form.Item>
             </Col>
           </Row>
@@ -241,13 +306,13 @@ const Signup = () => {
                 label="Birth Date"
                 {...birthDateConfig}
               >
-                <DatePicker style={{borderRadius: '8px'}}/>
+                <DatePicker style={{ borderRadius: "8px" }} />
               </Form.Item>
             </Col>
 
             <Col span={5}>
               <Form.Item name="join date" label="Join Date" {...joinDateConfig}>
-                <DatePicker style={{borderRadius: '8px'}}/>
+                <DatePicker style={{ borderRadius: "8px" }} />
               </Form.Item>
             </Col>
           </Row>
@@ -265,7 +330,10 @@ const Signup = () => {
                   },
                 ]}
               >
-                <Select placeholder="select your department" style={{borderRadius: '8px'}}>
+                <Select
+                  placeholder="select your department"
+                  style={{ borderRadius: "8px" }}
+                >
                   <Option value="r&d">R&D</Option>
                   <Option value="automation">Automation</Option>
                   <Option value="devops">DevOps</Option>
@@ -321,7 +389,7 @@ const Signup = () => {
             <Col span={5}>
               <Form.Item
                 name="food_preferences"
-                label="Food Preferences"
+                label="Food"
                 rules={[
                   {
                     required: true,
@@ -345,7 +413,7 @@ const Signup = () => {
             <Col span={5}>
               <Form.Item
                 name="phone"
-                label="Phone Number"
+                label="Phone"
                 rules={[
                   {
                     required: true,
@@ -357,16 +425,16 @@ const Signup = () => {
                   addonBefore={prefixSelector}
                   style={{
                     width: "100%",
-                    borderRadius: '8px'
+                    borderRadius: "8px",
                   }}
                 />
               </Form.Item>
             </Col>
 
             <Col span={5}>
-            <Form.Item
+              <Form.Item
                 name="marrige"
-                label="Married?"
+                label="Married"
                 rules={[
                   {
                     required: true,
@@ -379,13 +447,12 @@ const Signup = () => {
                   <Option value="no">No</Option>
                 </Select>
               </Form.Item>
-
             </Col>
           </Row>
 
-          <Row >
+          <Row>
             <Col span={5} offset={30}>
-            <Form.Item
+              <Form.Item
                 name="num_of_kids"
                 label="Number of kids"
                 rules={[
@@ -416,43 +483,50 @@ const Signup = () => {
 
             <DynamicKids kids={kids} birthDateConfig={birthDateConfig} />
 
-            <Col span={5}>
-
-            </Col>
+            <Col span={5}></Col>
           </Row>
-
-
 
           <Row span={50} offset={10}>
             <Form.Item
-                name="student"
-                defaultChecked="unchecked"
-                wrapperCol={{ offset: 6, span: 10 }}
-                onChange={(e) => setStudent(e.target.checked)}
-              >
-                <label>
-                  Student?
-                  <Checkbox />
-                </label>
+              name="student"
+              defaultChecked="unchecked"
+              wrapperCol={{ offset: 6, span: 10 }}
+              onChange={(e) => setStudent(e.target.checked)}
+            >
+              <label>
+                Student?
+                <Checkbox />
+              </label>
+            </Form.Item>
+
+            {student ? (
+              <Form.Item name="end date" label="End Date">
+                <DatePicker />
               </Form.Item>
-
-              {student ? (
-                <Form.Item name="end date" label="End Date" {...endDateConfig}>
-                  <DatePicker />
-                </Form.Item>
-
             ) : null}
           </Row>
 
-          <Form.Item {...tailFormItemLayout} style={{width: '68%', margin: 'center'}}>
-            <Button type="primary" htmlType="submit" style={{ backgroundColor: "#ffa5005c", fontWeight: 'bold', width: '120px', height: '50px', fontSize: '20px'}}>
+          <Form.Item
+            {...tailFormItemLayout}
+            style={{ width: "68%", margin: "center" }}
+          >
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{
+                backgroundColor: "#ffa5005c",
+                fontWeight: "bold",
+                width: "120px",
+                height: "50px",
+                fontSize: "20px",
+              }}
+            >
               Register
             </Button>
           </Form.Item>
         </Form>
       </Content>
-     {/* </Layout> */}
-      </>
+    </>
   );
 };
 
