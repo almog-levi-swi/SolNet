@@ -5,7 +5,7 @@ const Notifications = ({ employees }) => {
   return (
     <div>
       <Row style={{ marginBottom: '20px' }}>
-        <Card title="Birth date" bordered={true}>
+        <Card title="Birth date" bordered={true} >
           {employees.length > 0 ? (
             <Avatar.Group>
               {/** Sholud filter on employees and create array with relevant birthday employees */}

@@ -46,7 +46,7 @@ export const GraphBy = ({ setGraphBy }) => {
         <Space direction="vertical">
             <Space wrap>
                 <Dropdown overlay={menu} placement="bottomLeft">
-                    <Button>Graph By</Button>
+                    <Button>Category</Button>
                 </Dropdown>
             </Space>
         </Space>

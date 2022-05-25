@@ -7,9 +7,9 @@ import {
     VictoryLabel
 } from 'victory';
 
-export const Chart = ({ data, graphBy, }) => {
+export const Chart = ({ data, graphBy }) => {
     const quantity = 'quantity';
-    const COLOR = '#ffc107'
+    const COLOR = '#ffa5005c'
     const foodCategories = data.reduce((acc, cur) => {
         acc[cur[graphBy]] = (acc[cur[graphBy]] || 0) + 1;
         return acc;
