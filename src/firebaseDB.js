@@ -1,21 +1,19 @@
 const initializeApp = require('firebase/app');
-const { collection, getDocs } = require('firebase/firestore/lite');
-const { getDatabase, ref, child, get, push, set, remove } = require('firebase/database');
+// >>> const { app } = require('./firebase-config.js');
+// >>> const { collection, getDocs } = require('firebase/firestore/lite');
+// >>> const { getDatabase, ref, child, get, push, set, remove } = require('firebase/database');
+import { app } from './firebase-config.js';
+import { collection, getDocs } from 'firebase/firestore/lite';
+import { getDatabase, ref, child, get, push, set, remove } from 'firebase/database';
 
 
-// // TODO: Replace the following with your app's Firebase project configuration
-// const firebaseConfig = {
-//     //...
-//   };
-  
- // const app = initializeApp(firebaseConfig);
-  //const db = getFirestore(app);
-  
-async function getEmployees() {
-    const dbRef = ref(getDatabase());
-    return await get(child(dbRef, 'employees')).then((snapshot) => {
+export async function getEmployees(fieldName = null, fieldValue = null) {
+    const db = getDatabase();
+    const dbRef = ref(db);
+    const employeesRef = child(dbRef, 'employees')
+    return await get(employeesRef).then((snapshot) => {
       if (snapshot.exists()) {
-        return snapshot.val();
+        return filterOrderBy(snapshot.val(), fieldName, fieldValue);
       } else {
         console.log("No data available");
         return null
@@ -26,7 +24,30 @@ async function getEmployees() {
     });
 }
 
-async function insertEmployee(employee) {
+export function filterOrderBy(data, fieldName, fieldValue) {
+  const dataArray = []
+  Object.keys(data).forEach(key => {
+    dataArray.push({ key: key, record: data[key] })
+  })
+  if (!fieldName) {
+    return dataArray
+  }
+  sortedArray = dataArray.sort((a,b) => {
+    let retval = 0
+    if (a.record[fieldName] < b.record[fieldName]) {
+      retval = -1
+    } else if (a.record[fieldName] > b.record[fieldName]) {
+      retval = 1
+    }
+    return retval
+  })
+  if (!fieldValue) {
+    return sortedArray
+  }
+  return sortedArray.filter(entry => entry.record[fieldName] === fieldValue)
+}
+
+export async function insertEmployee(employee) {
     const db = getDatabase();
     const dbRef = ref(db);
     const newEmpRef = push(child(dbRef, 'employees'))
@@ -34,14 +55,14 @@ async function insertEmployee(employee) {
     return newEmpRef.key
 }
 
-async function updateEmployee(key, employee) {
+export async function updateEmployee(key, employee) {
     const db = getDatabase();
     const dbRef = ref(db);
     const newEmpRef = ref(db, `employees/${key}`)
     await set(newEmpRef, employee)
 }
 
-async function getEmployee(key) {
+export async function getEmployee(key) {
     const db = getDatabase();
     const dbRef = ref(db);
     return await get(child(dbRef, `employees/${key}`)).then((snapshot) => {
@@ -57,11 +78,11 @@ async function getEmployee(key) {
     });
 }
 
-async function deleteEmployee(key) {
+export async function deleteEmployee(key) {
     const db = getDatabase();
     const dbRef = ref(db);
     const newEmpRef = ref(db, `employees/${key}`)
     await remove(newEmpRef)
 }
 
-module.exports = { getEmployees, insertEmployee, updateEmployee, getEmployee, deleteEmployee };
+// >>> module.exports = { getEmployees, insertEmployee, updateEmployee, getEmployee, deleteEmployee };
